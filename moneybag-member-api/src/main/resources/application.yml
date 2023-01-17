@@ -1,0 +1,72 @@
+
+spring:
+    application:
+        name: moneybag-member-api
+    profiles:
+        active: local
+        group:
+            local: local, common
+            dev: dev, common
+            prod: prod, common
+---
+spring:
+    config:
+        activate:
+            on-profile: local
+    datasource:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost/db_moneybag?
+        username: local_moneybag
+        password: Q4S3+O9VA^r0f
+        hikari:
+            maximum-pool-size: 10
+            max-lifetime: 15000
+            data-source-properties:
+                cachePrepStmts: true
+                prepStmtCacheSize: 250
+                prepStmtCacheSqlLimit: 2048
+                useServerPrepStmts: true
+                serverTimezone: Asia/Seoul
+
+    jpa:
+        generate-ddl: true
+        hibernate:
+            ddl-auto: update
+            naming:
+                physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+        show-sql: true
+        open-in-view: false
+        properties:
+            jakarta:
+                persistence:
+                    sharedCache:
+                        mode: ALL
+            hibernate:
+                format_sql: true
+        database: mysql
+        database-platform: org.hibernate.dialect.MySQLDialect
+
+    server:
+        port: 8888
+---
+spring:
+    config:
+        activate:
+            on-profile: common
+
+jwt:
+    time:
+        life: 7200 # 60*60*2 2hours
+        refresh: 1209600 # 60*60*24*7*2 2weeks
+
+server:
+    servlet:
+        context-path: /
+        encoding:
+            charset: UTF-8
+            enabled: true
+            force: true
+            force-response: true
+    error:
+        whitelabel:
+            enabled: false
