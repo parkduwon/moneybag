@@ -17,5 +17,5 @@ open class AuditEntity (
 
     @LastModifiedDate
     @Column(name = "updated_at", nullable = false, columnDefinition = "DATE")
-    val updatedAt: LocalDateTime = LocalDateTime.now(),
+    var updatedAt: LocalDateTime = LocalDateTime.now(),
 )
