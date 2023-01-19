@@ -5,13 +5,15 @@ import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
+import kr.co.neuraline.moneybag.core.enum.Gender
 import org.jetbrains.annotations.NotNull
 
 @Entity
 data class Member(
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val memberId: Long = 1,
+    val memberId: Long? = null,
 
     @NotNull
     @Column(name = "member_name")
@@ -19,6 +21,10 @@ data class Member(
 
     @NotNull
     @Column(name = "member_phone")
-    val memberPhone: Int,
+    val memberPhone: String,
+
+    @NotNull
+    @Column(name = "member_gender")
+    val memberGender: Gender,
 
     ) : AuditEntity()
